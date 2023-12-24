@@ -5,8 +5,8 @@
     <groupId>com.example</groupId>
     <artifactId>easyCode</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>logAop</name>
-    <description>logAop</description>
+    <name>easyCode</name>
+    <description>easyCode</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
