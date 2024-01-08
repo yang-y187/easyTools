@@ -1,12 +1,26 @@
-引入包
-<groupId>easy.code.tool</groupId>
-<artifactId>easyCode</artifactId>
-<version>1.0-SNAPSHOT</version>
 
- 开启该easyTools的功能
-在Spring启动类中添加注解 @EnableEasyTools 即可
 
-@Log注解的使用
+# 介绍
+
+当前包旨在帮助简化使用，提供实用工具
+
+# 使用
+
+## 引入包
+
+```xml
+    <groupId>easy.code.tool</groupId>
+    <artifactId>easyCode</artifactId>
+    <version>1.0-SNAPSHOT</version>
+```
+
+开启该easyTools的功能
+
+- 在Spring启动类中添加注解 @EnableEasyTools
+-
+
+## @Log注解的使用
+
 可修饰类和方法 并且可以指定key，在方法维度
 
 修饰后，可在动态配置中配置就可打印出入参日志和抛出异常异常日志
