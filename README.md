@@ -27,7 +27,7 @@
 log.${ClassName}.${MethodName}          打印方法入参 入参前缀即log.${ClassName}.${MethodName}
 log.${ClassName}.${MethodName}.return   打印方法出参，打印前缀即 log.${ClassName}.${MethodName}.return
 log.${ClassName}.${MethodName}.throw    打印方法异常信息，打印前缀即 log.${ClassName}.${MethodName}.throw
-${keyName} 若指定注解key，则打印时，日志前缀为 ${keyName}
+${keyName} 若指定注解key，则打印时，日志前缀为 ${keyName}.${MethodName} 若是注解修饰的方法，打印日志为${keyName}
 
 注意：只能打印对象的public方法，不能打印static或者非public的方法
 @Log注解 若是修饰类，并且指定了key，开关开启的情况下，则该类的所有方法入参都会打印，出参同理
