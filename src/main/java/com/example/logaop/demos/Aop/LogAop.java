@@ -88,11 +88,11 @@ public class LogAop {
 
         // 获取目标类的注解
         Log annotation = Class.forName(className).getAnnotation(Log.class);
+        boolean isClassAnnotation = Objects.nonNull(annotation);
         // 若注解修饰的是方法，则获取目标方法的注解
-        if (Objects.isNull(annotation)) {
+        if (!isClassAnnotation) {
             Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
             annotation = method.getAnnotation(Log.class);
-
         }
         if (Objects.isNull(annotation)) {
             return null;
@@ -100,7 +100,7 @@ public class LogAop {
         // 获取Log接口里的LogKey参数
         String logKey = annotation.logKey();
         if (StringUtils.hasText(logKey)) {
-            return logKey;
+            return isClassAnnotation ? logKey + "." + methodName : logKey;
         }
         return "log." + classSimpleName + "." + methodName;
     }
