@@ -1,4 +1,4 @@
-package com.example.logaop.demos.config;
+package com.example.easyCode.config;
 
 import org.springframework.stereotype.Component;
 

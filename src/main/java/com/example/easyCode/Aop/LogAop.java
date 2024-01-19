@@ -1,7 +1,7 @@
-package com.example.logaop.demos.Aop;
+package com.example.easyCode.Aop;
 
 import com.alibaba.fastjson.JSON;
-import com.example.logaop.demos.Interface.Log;
+import com.example.easyCode.Interface.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

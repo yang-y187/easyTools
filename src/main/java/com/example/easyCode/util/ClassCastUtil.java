@@ -1,4 +1,4 @@
-package com.example.logaop.demos.util;
+package com.example.easyCode.util;
 
 /**
  * @author wangyangyang137

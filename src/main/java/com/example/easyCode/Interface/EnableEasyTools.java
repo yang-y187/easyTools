@@ -1,7 +1,7 @@
-package com.example.logaop.demos.Interface;
+package com.example.easyCode.Interface;
 
-import com.example.logaop.demos.Aop.LogAop;
-import com.example.logaop.demos.config.DynamicConfig;
+import com.example.easyCode.Aop.LogAop;
+import com.example.easyCode.config.DynamicConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

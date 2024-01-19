@@ -1,7 +1,7 @@
-package com.example.logaop.demos.Controller;
+package com.example.easyCode.Controller;
 
-import com.example.logaop.demos.Interface.Log;
-import com.example.logaop.demos.Service.helloService;
+import com.example.easyCode.Interface.Log;
+import com.example.easyCode.Service.helloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -76,7 +76,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.logaop.LogAopApplication</mainClass>
+                    <mainClass>com.example.easyCode.LogAopApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

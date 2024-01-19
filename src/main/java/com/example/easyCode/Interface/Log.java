@@ -1,7 +1,5 @@
-package com.example.logaop.demos.Interface;
+package com.example.easyCode.Interface;
 
-
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.*;
 
