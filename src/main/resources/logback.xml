@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="appName" value="easyTools"/>
+    <property name="logLevel" value="INFO"/>
+    <property name="logPath" value="/export/Logs/easyTools"/>
+    <property name="maxHistory" value="3"/>
+    <property name="queueSize" value="256"/>
+    <property name="logPattern"
+              value="[ %-5level] [%date{yyyy-MM-dd HH:mm:ss.SSS}] [%X{PFTID}] %logger{96} [%line] [%thread]- %msg%n"/>
+    <jmxConfigurator/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${logPath}/${appName}_debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/debug/${appName}_debug.log.%d{yyyy-MM-dd}.zip
+            </fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${logPath}/${appName}_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/info/${appName}_info.log.%d{yyyy-MM-dd}.zip
+            </fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${logPath}/${appName}_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/warn/${appName}_warn.log.%d{yyyy-MM-dd}.zip
+            </fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${logPath}/${appName}_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/error/${appName}_error.log.%d{yyyy-MM-dd}.zip
+            </fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${logPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC_LOG_DEBUG" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_DEBUG"/>
+    </appender>
+
+    <appender name="ASYNC_LOG_INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_INFO"/>
+    </appender>
+
+    <appender name="ASYNC_LOG_WARN" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_WARN"/>
+    </appender>
+
+    <appender name="ASYNC_LOG_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>${queueSize}</queueSize>
+        <appender-ref ref="FILE_ERROR"/>
+    </appender>
+
+
+
+    <logger name="com.jd.jim.cli.core.handler.ConnectionWatchdog" level="off"/>
+    <logger name="com.jd.jsf.gd.registry.jsf.RegistryServiceClient" level="off"/>
+    <logger name="com.jd.jsf.gd.transport.ServerChannelHandler" level="off"/>
+    <logger name="com.jd.matrix.metadata.trace.gateway.mq.ReportFlowManager" level="off"/>
+    <logger name="com.jd.matrix.core.bizreport.util.DomainServiceUtil" level="off"/>
+    <logger name="com.jd.matrix.metadata.plugin.CJGPluginServiceImpl" level="off"/>
+    <logger name="com.jd.jmq.client.consumer.GroupConsumer" level="off"/>
+    <logger name="com.jd.jmq.common.network.netty.failover.FailoverNettyClient" level="off"/>
+    <logger name="com.jd.jsf.gd.client.Client" level="off"/>
+    <logger name="com.jd.jsf.gd.filter.limiter.LimiterFactory" level="off"/>
+    <logger name="com.jd.jmq.client.connection.ConsumerClient" level="off"/>
+    <logger name="com.wangyin.key.server.util.Preconditions" level="off"/>
+    <logger name="com.jd.matrix.core.session.ExtensionTransaction" level="off"/>
+    <logger name="com.wangyin.key.server.thread.ChannelExecutor" level="off"/>
+    <logger name="com.jd.jsf.gd.monitor.MonitorFactory" level="off"/>
+    <logger name="com.jd.pfinder.profiler.reporter.MetricRemoteReporter" level="off"/>
+    <logger name="com.alibaba.druid.pool.DruidAbstractDataSource" level="off"/>
+    <logger name="com.jd.jsf.gd.config.ServerConfig" level="off"/>
+    <logger name="com.jd.jsf.gd.util.NetUtils" level="off"/>
+    <logger name="com.jd.jsf.gd.registry.jsf.JSFRegistryHelper" level="off"/>
+    <logger name="com.jd.jsf.gd.server.TelnetChannelHandler" level="off"/>
+    <logger name="com.jd.jsf.gd.codec.AdapterDecoder" level="off"/>
+    <logger name="com.jd.matrix.core.manager.DomainManager" level="off"/>
+    <logger name="com.jd.jim.cli.core.JimContext" level="off"/>
+    <logger name="com.jd.matrix.core.bizreport.ContextStartReport" level="off"/>
+    <root level="${logLevel}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ASYNC_LOG_DEBUG"/>
+        <appender-ref ref="ASYNC_LOG_INFO"/>
+        <appender-ref ref="ASYNC_LOG_WARN"/>
+        <appender-ref ref="ASYNC_LOG_ERROR"/>
+    </root>
+</configuration>
