@@ -1,6 +1,6 @@
-package com.example.easyCode.Service;
+package com.example.easycode.service;
 
-import com.example.easyCode.Interface.Log;
+import com.example.easycode.Interface.Log;
 import org.springframework.stereotype.Service;
 
 /**

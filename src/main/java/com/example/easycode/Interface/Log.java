@@ -1,4 +1,4 @@
-package com.example.easyCode.Interface;
+package com.example.easycode.Interface;
 
 
 import java.lang.annotation.*;

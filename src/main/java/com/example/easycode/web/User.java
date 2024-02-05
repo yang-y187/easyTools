@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.easyCode.web;
+package com.example.easycode.web;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>

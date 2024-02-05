@@ -1,4 +1,4 @@
-package com.example.easyCode;
+package com.example.easycode;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

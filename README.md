@@ -24,10 +24,14 @@
 可修饰类和方法 并且可以指定key，在方法维度
 
 修饰后，可在动态配置中配置就可打印出入参日志和抛出异常异常日志
-log.${ClassName}.${MethodName}          打印方法入参 入参前缀即log.${ClassName}.${MethodName}
-log.${ClassName}.${MethodName}.return   打印方法出参，打印前缀即 log.${ClassName}.${MethodName}.return
-log.${ClassName}.${MethodName}.throw    打印方法异常信息，打印前缀即 log.${ClassName}.${MethodName}.throw
+- log.${ClassName}.${MethodName}          打印方法入参 入参前缀即log.${ClassName}.${MethodName}
+- log.${ClassName}.${MethodName}.return   打印方法出参，打印前缀即 log.${ClassName}.${MethodName}.return
+- log.${ClassName}.${MethodName}.throw    打印方法异常信息，打印前缀即 log.${ClassName}.${MethodName}.throw
+- log.${ClassName}.*                      打印该类下所有公共方法入参 入参前缀即log.${ClassName}.${MethodName}
+- log.${ClassName}.*.return               打印该类下所有公共方法出参，打印前缀即 log.${ClassName}.${MethodName}.return
 ${keyName} 若指定注解key，则打印时，日志前缀为 ${keyName}.${MethodName} 若是注解修饰的方法，打印日志为${keyName}
+默认打印异常日志，并且打印异常方法参数信息log.${ClassName}.${MethodName}
+
 
 注意：只能打印对象的public方法，不能打印static或者非public的方法
 @Log注解 若是修饰类，并且指定了key，开关开启的情况下，则该类的所有方法入参都会打印，出参同理

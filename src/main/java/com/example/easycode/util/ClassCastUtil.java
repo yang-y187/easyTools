@@ -1,4 +1,4 @@
-package com.example.easyCode.util;
+package com.example.easycode.util;
 
 /**
  * @author wangyangyang137

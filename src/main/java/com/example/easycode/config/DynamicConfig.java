@@ -1,4 +1,4 @@
-package com.example.easyCode.config;
+package com.example.easycode.config;
 
 import org.springframework.stereotype.Component;
 

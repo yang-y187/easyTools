@@ -1,7 +1,7 @@
-package com.example.easyCode.Aop;
+package com.example.easycode.aop;
 
 import com.alibaba.fastjson.JSON;
-import com.example.easyCode.Interface.Log;
+import com.example.easycode.Interface.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author wangyangyang
@@ -46,8 +47,13 @@ public class LogAop {
      */
     @Before("logPointCut()")
     public void logParams(JoinPoint joinPoint) throws ClassNotFoundException {
+        if (joinPoint.getArgs() == null) {
+            return;
+        }
+
         String key = this.getKey(joinPoint);
-        if (joinPoint.getArgs() != null && map.getOrDefault(key, false)) {
+        String vagueKey = this.getVagueKey(joinPoint);
+        if (map.getOrDefault(key, false) || map.getOrDefault(vagueKey, false)) {
             log.info(key + ": " + JSON.toJSONString(joinPoint.getArgs()));
         }
     }
@@ -59,9 +65,15 @@ public class LogAop {
      */
     @AfterReturning(pointcut = "logPointCut()", returning = "returnVal")
     public void logReturn(JoinPoint joinPoint, Object returnVal) throws ClassNotFoundException {
+        if (returnVal == null) {
+            return;
+        }
         String key = this.getKey(joinPoint);
         key += ".return";
-        if (returnVal != null && map.getOrDefault(key, false)) {
+
+        String vagueKey = this.getVagueKey(joinPoint);
+        vagueKey += ".return";
+        if (map.getOrDefault(key, false) ||map.getOrDefault(vagueKey, false) ) {
             log.info(key + ": " + JSON.toJSONString(returnVal));
         }
     }
@@ -69,10 +81,28 @@ public class LogAop {
 
     @AfterThrowing(pointcut = "logPointCut()", throwing = "e")
     public void logThrow(JoinPoint joinPoint, Throwable e) throws ClassNotFoundException {
+        if (e == null) {
+            return;
+        }
         String key = this.getKey(joinPoint);
-        key += ".throw";
-        if (e != null && map.getOrDefault(key, false))
-            log.info(key + ": " + e);
+
+        String beforeKey = key;
+        String throwKey = key + ".throw";
+        String returnKey = key + ".return";
+        String printLog = null;
+        if (map.getOrDefault(key, false)) {
+            printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
+            log.error(beforeKey + ": {}", printLog, e);
+        } else if ( map.getOrDefault(key, false)) {
+            printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
+            log.error(throwKey + ": {}", printLog, e);
+        } else if (map.getOrDefault(key, false)) {
+            printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
+            log.error(returnKey + ": {}", printLog, e);
+        } else {
+            printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
+            log.error(key + ": {}", printLog, e);
+        }
     }
 
     /**
@@ -103,5 +133,14 @@ public class LogAop {
             return isClassAnnotation ? logKey + "." + methodName : logKey;
         }
         return "log." + classSimpleName + "." + methodName;
+    }
+
+    /**
+     * 获取模糊日志：key 方便日志搜索
+     */
+    private String getVagueKey(JoinPoint joinPoint) {
+        // 获取类名
+        String classSimpleName = joinPoint.getTarget().getClass().getSimpleName();
+        return "log." + classSimpleName + ".*";
     }
 }
