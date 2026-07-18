@@ -1,0 +1,7 @@
+target/
+.idea/
+.claude/
+CLAUDE.md
+AGENTS.md
+*.iml
+

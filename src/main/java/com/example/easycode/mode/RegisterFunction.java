@@ -1,7 +1,5 @@
 package com.example.easycode.mode;
 
-
-import java.util.HashMap;
 import java.util.function.Function;
 
 
@@ -12,10 +10,8 @@ import java.util.function.Function;
  */
 public abstract class RegisterFunction<L, M, R> {
 
-    /**
-     * 注册器集合
-     */
-    private final HashMap<L, Function<M, R>> FUNCTION_MAP = new HashMap<>();
+    private final AbstractRegistry<L, Function<M, R>> registry = new AbstractRegistry<L, Function<M, R>>() {
+    };
 
     /**
      * 注册字段对应的处理函数
@@ -25,7 +21,7 @@ public abstract class RegisterFunction<L, M, R> {
      * this.registerFunction("1",(t)-> t.toString());
      */
     public void registerFunction(L key, Function<M, R> dealFunction) {
-        FUNCTION_MAP.put(key, dealFunction);
+        registry.register(key, dealFunction);
     }
 
     /**
@@ -36,11 +32,32 @@ public abstract class RegisterFunction<L, M, R> {
      * @return 函数处理后的响应
      */
     public R applyFunction(L key, M input) {
-        Function<M, R> f = FUNCTION_MAP.get(key);
+        Function<M, R> f = registry.get(key);
         if (f != null) {
             return f.apply(input);
         }
         return null;
+    }
+
+    /**
+     * 应用指定key对应的函数来处理输入，不允许函数不存在
+     *
+     * @param key   用于查找函数的键
+     * @param input 输入参数
+     * @return 函数处理后的响应
+     */
+    public R applyRequired(L key, M input) {
+        return registry.getRequired(key).apply(input);
+    }
+
+    /**
+     * 判断函数是否已注册
+     *
+     * @param key 指定key
+     * @return true 已注册 false 未注册
+     */
+    public boolean containsFunction(L key) {
+        return registry.contains(key);
     }
 
 }

@@ -36,7 +36,7 @@ public class LogAop {
         map.put("我是key.return", true);
     }
 
-    @Pointcut("@annotation(com.example.logaop.demos.Interface.Log)||@within(com.example.logaop.demos.Interface.Log)")
+    @Pointcut("@annotation(com.example.easycode.Interface.Log)||@within(com.example.easycode.Interface.Log)")
     private void logPointCut() {
     }
 
@@ -93,10 +93,10 @@ public class LogAop {
         if (map.getOrDefault(key, false)) {
             printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
             log.error(beforeKey + ": {}", printLog, e);
-        } else if ( map.getOrDefault(key, false)) {
+        } else if (map.getOrDefault(throwKey, false)) {
             printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
             log.error(throwKey + ": {}", printLog, e);
-        } else if (map.getOrDefault(key, false)) {
+        } else if (map.getOrDefault(returnKey, false)) {
             printLog = Optional.ofNullable(joinPoint.getArgs()).map(JSON::toJSONString).orElse("");
             log.error(returnKey + ": {}", printLog, e);
         } else {
